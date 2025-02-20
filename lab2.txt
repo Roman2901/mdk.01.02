@@ -1,0 +1,77 @@
+// Владельцы члены группы
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ file /etc/shadow
+/etc/shadow: regular file, no read permission
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ less /etc/shadow
+/etc/shadow: Permission denied
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ id
+uid=1000(codespace) gid=1000(codespace) groups=1000(codespace),106(ssh),107(docker),989(pipx),990(python),991(oryx),992(golang),993(sdkman),994(rvm),995(php),996(conda),997(nvs),998(nvm),999(hugo)
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ id
+uid=1000(codespace) gid=1000(codespace) groups=1000(codespace),106(ssh),107(docker),989(pipx),990(python),991(oryx),992(golang),993(sdkman),994(rvm),995(php),996(conda),997(nvs),998(nvm),999(hugo)
+
+// Чтение, запись и выполнение
+
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ foo.txt
+bash: foo.txt: command not found
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $  ls -l foo.txt
+ls: cannot access 'foo.txt': No such file or directory
+
+// chmod — изменение режима доступа к файлу
+
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ > foo.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ ls -l foo.txt
+-rw-rw-rw- 1 codespace codespace 0 Feb  6 06:21 foo.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ chmod 600 foo.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ ls -l foo.txt
+-rw------- 1 codespace codespace 0 Feb  6 06:21 foo.txt
+
+// umask
+
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ rm -f foo.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ umask
+0022
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $  > foo.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $  ls -l foo.txt
+-rw-rw-rw- 1 codespace codespace 0 Feb  6 06:25 foo.txt
+
+//Практика
+
+
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ touch f1.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ ls f1.txt
+f1.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ ls
+1  2  3  Test  f1.txt  lab1.txt  lab2.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ mkdir1 Test
+bash: mkdir1: command not found
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ mkdir Test
+mkdir: cannot create directory ‘Test’: File exists
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ stat f1.txt
+  File: f1.txt
+  Size: 0               Blocks: 0          IO Block: 4096   regular empty file
+Device: 704h/1796d      Inode: 1310799     Links: 1
+Access: (0666/-rw-rw-rw-)  Uid: ( 1000/codespace)   Gid: ( 1000/codespace)
+Access: 2025-02-06 07:10:50.038683626 +0000
+Modify: 2025-02-06 07:10:50.038683626 +0000
+Change: 2025-02-06 07:10:50.038683626 +0000
+ Birth: -
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ cd Test/
+@Roman2901 ➜ /workspaces/mdk.01.02/Test (main) $ touch 1
+@Roman2901 ➜ /workspaces/mdk.01.02/Test (main) $ touch 2
+@Roman2901 ➜ /workspaces/mdk.01.02/Test (main) $ touch 3
+@Roman2901 ➜ /workspaces/mdk.01.02/Test (main) $ touch 4
+@Roman2901 ➜ /workspaces/mdk.01.02/Test (main) $ cd ..
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ ls Test
+ls: cannot open directory 'Test': Permission denied
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ sudo chmod 777 f1.txt
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ stat f1.txt
+  File: f1.txt
+  Size: 0               Blocks: 0          IO Block: 4096   regular empty file
+Device: 704h/1796d      Inode: 1310799     Links: 1
+Access: (0777/-rwxrwxrwx)  Uid: ( 1000/codespace)   Gid: ( 1000/codespace)
+Access: 2025-02-06 07:10:50.038683626 +0000
+Modify: 2025-02-06 07:10:50.038683626 +0000
+Change: 2025-02-06 07:15:15.622691815 +0000
+ Birth: -
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ ls Test/total 0
+ls: cannot access 'Test/total': No such file or directory
+ls: cannot access '0': No such file or directory
