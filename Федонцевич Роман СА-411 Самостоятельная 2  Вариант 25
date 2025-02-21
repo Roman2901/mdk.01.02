@@ -1,0 +1,127 @@
+Федонцевич Роман СА-411 Самостоятельная 2  Вариант 25
+
+                                     ROUTER
+
+Router(config-if)#exit
+Router(config)#do show ip dhc
+Router(config)#do show ip dhcp pool
+
+Pool CLASS1 :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0 
+ Total addresses                : 62
+ Leased addresses               : 0
+ Excluded addresses             : 0
+ Pending event                  : none
+
+ 1 subnet is currently in the pool
+ Current index        IP address range                    Leased/Excluded/Total
+ 192.168.25.1         192.168.25.1     - 192.168.25.62     0    / 0     / 62
+
+Pool CLASS2 :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0 
+ Total addresses                : 62
+ Leased addresses               : 0
+ Excluded addresses             : 0
+ Pending event                  : none
+
+ 1 subnet is currently in the pool
+ Current index        IP address range                    Leased/Excluded/Total
+ 192.168.25.65        192.168.25.65    - 192.168.25.126    0    / 0     / 62
+
+Pool CLASS3 :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0 
+ Total addresses                : 14
+ Leased addresses               : 0
+ Excluded addresses             : 0
+ Pending event                  : none
+
+ 1 subnet is currently in the pool
+ Current index        IP address range                    Leased/Excluded/Total
+ 192.168.25.129       192.168.25.129   - 192.168.25.142    0    / 0     / 14
+
+Pool CLASS4 :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0 
+ Total addresses                : 14
+ Leased addresses               : 0
+ Excluded addresses             : 0
+ Pending event                  : none
+
+ 1 subnet is currently in the pool
+ Current index        IP address range                    Leased/Excluded/Total
+ 192.168.25.145       192.168.25.145   - 192.168.25.158    0    / 0     / 14
+
+
+
+
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.2
+ encapsulation dot1Q 2
+ ip address 192.168.25.62 255.255.255.192
+!
+interface GigabitEthernet0/1.3
+ encapsulation dot1Q 3
+ ip address 192.168.25.126 255.255.255.192
+!
+interface GigabitEthernet0/1.4
+ encapsulation dot1Q 4
+ ip address 192.168.25.142 255.255.255.240
+!
+interface GigabitEthernet0/1.5
+ encapsulation dot1Q 5
+ ip address 192.168.25.158 255.255.255.240
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+
+                             Сервер и роутер доп задание
+
+                                        Роутер
+
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/1.2
+ encapsulation dot1Q 2
+ ip address 192.168.25.62 255.255.255.192
+!
+interface GigabitEthernet0/1.3
+ encapsulation dot1Q 3
+ ip address 192.168.25.126 255.255.255.192
+!
+interface GigabitEthernet0/1.4
+ encapsulation dot1Q 4
+ ip address 192.168.25.142 255.255.255.240
+!
+interface GigabitEthernet0/1.5
+ encapsulation dot1Q 5
+ ip address 192.168.25.158 255.255.255.240
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
