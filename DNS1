@@ -1,0 +1,65 @@
+ dig drom.ru
+
+; <<>> DiG 9.18.30-0ubuntu0.22.04.2-Ubuntu <<>> drom.ru
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 5363
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;drom.ru.			IN	A
+
+;; ANSWER SECTION:
+drom.ru.		76818	IN	A	185.65.149.115
+drom.ru.		76818	IN	A	185.165.123.46
+
+;; Query time: 1 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Thu Mar 06 12:27:49 +05 2025
+;; MSG SIZE  rcvd: 68
+
+u27@u27-VirtualBox:~$ dig drom.ru
+
+; <<>> DiG 9.18.30-0ubuntu0.22.04.2-Ubuntu <<>> drom.ru
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 52394
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;drom.ru.			IN	A
+
+;; ANSWER SECTION:
+drom.ru.		7197	IN	A	185.65.149.115
+drom.ru.		7197	IN	A	185.165.123.46
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Thu Mar 06 12:27:52 +05 2025
+;; MSG SIZE  rcvd: 68
+
+u27@u27-VirtualBox:~$ dig drom.ru
+
+; <<>> DiG 9.18.30-0ubuntu0.22.04.2-Ubuntu <<>> drom.ru
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 41354
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;drom.ru.			IN	A
+
+;; ANSWER SECTION:
+drom.ru.		7196	IN	A	185.165.123.46
+drom.ru.		7196	IN	A	185.65.149.115
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Thu Mar 06 12:27:53 +05 2025
+;; MSG SIZE  rcvd: 68
