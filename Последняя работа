@@ -1,0 +1,88 @@
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker history 0be60f461ea8                                 //history
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+0be60f461ea8   2 minutes ago   /bin/bash                                       134MB     добавлен ip, ping, dnsutils
+a04dc4851cbc   7 weeks ago     /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B        
+<missing>      7 weeks ago     /bin/sh -c #(nop) ADD file:6df775300d76441aa…   78.1MB    
+<missing>      7 weeks ago     /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      7 weeks ago     /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      7 weeks ago     /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B        
+<missing>      7 weeks ago     /bin/sh -c #(nop)  ARG RELEASE                  0B        
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker inspect a04dc4851cbc                                                 // inspect
+[
+    {
+        "Id": "sha256:a04dc4851cbcbb42b54d1f52a41f5f9eca6a5fd03748c3f6eb2cbeb238ca99bd",
+        "RepoTags": [
+            "ubuntu:24.04"
+        ],
+        "RepoDigests": [
+            "ubuntu@sha256:72297848456d5d37d1262630108ab308d3e9ec7ed1c3286a32fe09856619a782"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2025-01-27T04:14:03.599776663Z",
+        "DockerVersion": "24.0.7",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "Image": "sha256:807964e308294a3fd3ce42968625699bece61632bd5ce017acb6654314347f9c",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 78127075,
+        "GraphDriver": {
+            "Data": {
+                "MergedDir": "/var/lib/docker/overlay2/6a11319df10c5b9e72123e508594da4aaad5c857f09ba1a454f790b68eb61baa/merged",
+                "UpperDir": "/var/lib/docker/overlay2/6a11319df10c5b9e72123e508594da4aaad5c857f09ba1a454f790b68eb61baa/diff",
+                "WorkDir": "/var/lib/docker/overlay2/6a11319df10c5b9e72123e508594da4aaad5c857f09ba1a454f790b68eb61baa/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:4b7c01ed0534d4f9be9cf97d068da1598c6c20b26cb6134fad066defdb6d541d"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+
+
+
+
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker commit -m “…” -a “author”
+
+
+"docker commit" requires at least 1 and at most 2 arguments.
+See 'docker commit --help'.
+
+Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+
+Create a new image from a container's changes
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ 
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ 
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker commit -m "добавлен ip, ping, dnsutils" -a "ROMCHIK" 805f6331492b roman:0.2
