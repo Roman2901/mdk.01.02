@@ -1,0 +1,76 @@
+Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker search ubuntu
+NAME                             DESCRIPTION                                     STARS     OFFICIAL
+ubuntu                           Ubuntu is a Debian-based Linux operating sys…   17506     [OK]
+ubuntu/cortex                    Cortex provides storage for Prometheus. Long…   4         
+ubuntu/kafka                     Apache Kafka, a distributed event streaming …   53        
+ubuntu/prometheus                Prometheus is a systems and service monitori…   70        
+ubuntu/zookeeper                 ZooKeeper maintains configuration informatio…   13        
+ubuntu/squid                     Squid is a caching proxy for the Web. Long-t…   108       
+ubuntu/nginx                     Nginx, a high-performance reverse proxy & we…   128       
+ubuntu/postgres                  PostgreSQL is an open source object-relation…   41        
+ubuntu/redis                     Redis, an open source key-value store. Long-…   23        
+ubuntu/jre                       Distroless Java runtime based on Ubuntu. Lon…   19        
+ubuntu/dotnet-aspnet             Chiselled Ubuntu runtime image for ASP.NET a…   26        
+ubuntu/apache2                   Apache, a secure & extensible open-source HT…   90        
+ubuntu/bind9                     BIND 9 is a very flexible, full-featured DNS…   101       
+ubuntu/grafana                   Grafana, a feature rich metrics dashboard & …   12        
+ubuntu/cassandra                 Cassandra, an open source NoSQL distributed …   2         
+ubuntu/dotnet-deps               Chiselled Ubuntu for self-contained .NET & A…   16        
+ubuntu/mysql                     MySQL open source fast, stable, multi-thread…   67        
+ubuntu/python                    A chiselled Ubuntu rock with the Python runt…   20        
+ubuntu/memcached                 Memcached, in-memory keyvalue store for smal…   5         
+ubuntu/dotnet-runtime            Chiselled Ubuntu runtime image for .NET apps…   20        
+ubuntu/prometheus-alertmanager   Alertmanager handles client alerts from Prom…   9         
+ubuntu/telegraf                  Telegraf collects, processes, aggregates & w…   4         
+ubuntu/loki                      Grafana Loki, a log aggregation system like …   2         
+ubuntu/chiselled-jre             [MOVED TO ubuntu/jre] Chiselled JRE: distrol…   3         
+ubuntu/mimir                     Ubuntu ROCK for Mimir, a horizontally scalab…   0         
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker pull <ubuntu>
+bash: syntax error near unexpected token `newline'
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker pull ubuntu:20.04
+20.04: Pulling from library/ubuntu
+d9802f032d67: Pull complete 
+Digest: sha256:8e5c4f0285ecbb4ead070431d29b576a530d3166df73ec44affc1cd27555141b
+Status: Downloaded newer image for ubuntu:20.04
+docker.io/library/ubuntu:20.04
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker pull ubuntu:22.04
+^[[C22.04: Pulling from library/ubuntu
+9cb31e2e37ea: Pull complete 
+Digest: sha256:ed1544e454989078f5dec1bfdabd8c5cc9c48e0705d07b678ab6ae3fb61952d2
+Status: Downloaded newer image for ubuntu:22.04
+docker.io/library/ubuntu:22.04
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker pull ubuntu:24.04
+24.04: Pulling from library/ubuntu
+5a7813e071bf: Pull complete 
+Digest: sha256:72297848456d5d37d1262630108ab308d3e9ec7ed1c3286a32fe09856619a782
+Status: Downloaded newer image for ubuntu:24.04
+docker.io/library/ubuntu:24.04
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+ubuntu       24.04     a04dc4851cbc   7 weeks ago    78.1MB
+ubuntu       22.04     a24be041d957   7 weeks ago    77.9MB
+ubuntu       20.04     6013ae1a63c2   5 months ago   72.8MB
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker rmi 6013ae1a63c2
+Untagged: ubuntu:20.04
+Untagged: ubuntu@sha256:8e5c4f0285ecbb4ead070431d29b576a530d3166df73ec44affc1cd27555141b
+Deleted: sha256:6013ae1a63c2ee58a8949f03c6366a3ef6a2f386a7db27d86de2de965e9f450b
+Deleted: sha256:fffe76c64ef2dee2d80a8bb3ad13d65d596d04a45510b1956a976a69215dae92
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       24.04     a04dc4851cbc   7 weeks ago   78.1MB
+ubuntu       22.04     a24be041d957   7 weeks ago   77.9MB
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker run a04dc4851cbc
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker run -d a04dc4851cbc
+c359e2a4974ea1ef223b1b2f538ec64d6f8501990058e48804cc52abc69a8b78
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker run -it ubuntu:24.04
+root@eb760211d341:/# pwd
+/
+root@eb760211d341:/# uname -a
+Linux eb760211d341 6.8.0-1021-azure #25~22.04.1-Ubuntu SMP Thu Jan 16 21:37:09 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+root@eb760211d341:/# 
+exit
+@Roman2901 ➜ /workspaces/mdk.01.02 (main) $ docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED              STATUS                          PORTS     NAMES
+eb760211d341   ubuntu:24.04   "/bin/bash"   59 seconds ago       Exited (0) 38 seconds ago                 objective_mcnulty
+c359e2a4974e   a04dc4851cbc   "/bin/bash"   About a minute ago   Exited (0) About a minute ago             wonderful_joliot
+0c8787071ff4   a04dc4851cbc   "/bin/bash"   2 minutes ago        Exited (0) 2 minutes ago                  musing_chebyshev
