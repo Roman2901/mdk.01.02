@@ -1,0 +1,36 @@
+u27@u27-VirtualBox:~$ docker run -d mysql
+0f9c85bc027cfc0aa07c86646639ea4330d7464c2ee6f0a90688b8fcbb2da99a
+u27@u27-VirtualBox:~$ ps -a
+    PID TTY          TIME CMD
+   1628 tty2     00:00:00 gnome-session-b
+   2391 pts/0    00:00:00 ps
+u27@u27-VirtualBox:~$ docke ps
+Команда «docke» не найдена. Возможно, вы имели в виду:
+  команда 'docker' из deb-пакета podman-docker (3.4.4+ds1-1ubuntu1.22.04.3)
+  команда 'docker' из deb-пакета docker.io (26.1.3-0ubuntu1~22.04.1)
+Попробуйте: sudo apt install <имя_deb-пакета>
+u27@u27-VirtualBox:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+u27@u27-VirtualBox:~$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                      PORTS                 NAMES
+0f9c85bc027c   mysql          "docker-entrypoint.s…"   27 seconds ago   Exited (1) 18 seconds ago                         eloquent_roentgen
+53d18a90eab4   ubuntu:24.04   "/bin/bash"              2 hours ago      Exited (0) 2 hours ago                            myubuntu
+9257474b055d   mysql          "docker-entrypoint.s…"   7 days ago       Exited (255) 2 hours ago    3306/tcp, 33060/tcp   confident_blackwell
+4c219548500b   ubuntu:24.04   "/bin/bash"              7 days ago       Exited (255) 2 hours ago                          busy_edison
+aafc192b0f74   a04dc4851cbc   "/bin/bash"              7 days ago       Exited (0) 7 days ago                             gallant_cerf
+c7fa1541d291   a04dc4851cbc   "/bin/bash"              7 days ago       Exited (0) 7 days ago                             naughty_cray
+u27@u27-VirtualBox:~$ docker run -e MYSQL_ROOT_PASSWORD=123 -d mysql
+cabbe2cbe03ff9204b5b7c45c25e1782a10c6f03e337bf3a217779f97988d6f4
+u27@u27-VirtualBox:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                 NAMES
+cabbe2cbe03f   mysql     "docker-entrypoint.s…"   15 seconds ago   Up 12 seconds   3306/tcp, 33060/tcp   agitated_roentgen
+u27@u27-VirtualBox:~$ docker run -e MARIADB_ROOT_PASSWORD=1234 -d mariadb
+ecba7806fbc3e603b5abc95315d7b5d1b27c8cb1ed4436f279180fe9003c651c
+dou27@u27-VirtualBox:~$ docker run -e POSTGRES_PASSWORD=1234 -d postgres
+60b257bd6f6f294fb0be24bd3e4cace47ebdf3eb7fb3f62967a9562adcaccbba
+u27@u27-VirtualBox:~$ docker ps
+CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                 NAMES
+60b257bd6f6f   postgres   "docker-entrypoint.s…"   23 seconds ago   Up 10 seconds   5432/tcp              silly_nightingale
+ecba7806fbc3   mariadb    "docker-entrypoint.s…"   2 minutes ago    Up 2 minutes    3306/tcp              friendly_feistel
+cabbe2cbe03f   mysql      "docker-entrypoint.s…"   3 minutes ago    Up 3 minutes    3306/tcp, 33060/tcp   agitated_roentgen
+u27@u27-VirtualBox:~$ docker logs
