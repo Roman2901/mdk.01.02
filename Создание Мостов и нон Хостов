@@ -1,0 +1,40 @@
+// Создание контов и мосты с мои пингом
+u27@u27-VirtualBox:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND     CREATED             STATUS             PORTS     NAMES
+fc8625a0c1c0   alpine    "/bin/sh"   4 minutes ago       Up 4 minutes                 cont8
+43d2504e6bdb   alpine    "/bin/sh"   4 minutes ago       Up 4 minutes                 cont7
+631eed2bdfa9   alpine    "/bin/sh"   4 minutes ago       Up 4 minutes                 cont6
+2811dd69293a   alpine    "/bin/sh"   5 minutes ago       Up 5 minutes                 cont5
+737d4fa6b551   alpine    "/bin/sh"   58 minutes ago      Up 58 minutes                cont4
+dae53e31041e   alpine    "/bin/sh"   58 minutes ago      Up 58 minutes                cont3
+e91bfcbb63b9   alpine    "/bin/sh"   59 minutes ago      Up 59 minutes                cont2
+31810d2f4fa7   alpine    "/bin/sh"   About an hour ago   Up About an hour             cont1
+u27@u27-VirtualBox:~$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+8965b1c0eeaf   ROM1      bridge    local
+5bb7068c2c08   ROM2      bridge    local
+40dfafe6d358   ROM3      bridge    local
+1a538a18fa48   ROM4      bridge    local
+1fc8fd0d3f04   ROMA      bridge    local
+e8403ff50d67   ROMA2     bridge    local
+10c6fcacce2b   ROMA3     bridge    local
+b8c7c0d4d47e   ROMA4     bridge    local
+5f708dc0ccfb   ROMA5     bridge    local
+adbd6540f45e   ROMA6     bridge    local
+39ec269fc700   ROMA7     bridge    local
+45b03b52cb8c   ROMA8     bridge    local
+924535131e11   bridge    bridge    local
+d7d45cc208b9   host      host      local
+323601181c06   none      null      local
+
+// Заполняем айпишниками задание 1
+u27@u27-VirtualBox:~$ docker network create -d bridge --subnet 192.168.25.0/26 --gateway 192.168.25.1 ROM1
+8965b1c0eeaf1d9f42b6c70085732b2534ed27b9cf1501d418010cdb6b8fd796
+invalid subnet 192.168.25.63/26: it should be 192.168.25.0/26
+u27@u27-VirtualBox:~$ docker network create -d bridge --subnet 192.168.25.64/26 --gateway 192.168.25.65 ROM2
+5bb7068c2c082d9a297659b4a274a508172b1b92a11731838bd34a03d5a5f37c
+u27@u27-VirtualBox:~$ docker network create -d bridge --subnet 192.168.25.128/28 --gateway 192.168.25.129 ROM3
+40dfafe6d358d89c351641bc5756d1624f1537c3ebc4e7ae6739e1447ef178e5
+u27@u27-VirtualBox:~$ docker network create -d bridge --subnet 192.168.25.144/29 --gateway 192.168.25.145 ROM4
+1a538a18fa48073f6415c2e124ff4e5e87111eed9019762c0a665c12718569f8
+
