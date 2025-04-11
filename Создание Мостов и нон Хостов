@@ -70,3 +70,167 @@ PING cont4 (192.168.25.146): 56 data bytes
 --- cont4 ping statistics ---
 4 packets transmitted, 4 packets received, 0% packet loss
 round-trip min/avg/max = 0.023/0.089/0.123 ms
+
+// Работа контейнеров в каждой сети по 1
+u27@u27-VirtualBox:~$ docker network inspect ROM1
+[
+    {
+        "Name": "ROM1",
+        "Id": "8965b1c0eeaf1d9f42b6c70085732b2534ed27b9cf1501d418010cdb6b8fd796",
+        "Created": "2025-04-10T11:46:27.31928431+05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.25.0/26",
+                    "Gateway": "192.168.25.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "f555c8d3e447f8e3728a22698a4cf3c892a7977ec39b592327859ad38edc8e96": {
+                "Name": "cont1",
+                "EndpointID": "d63ebfb4048e63eb02017ab02ae05692c1d6e10da9f5a4dc3d4803a4c2d624f6",
+                "MacAddress": "5a:70:0b:12:39:04",
+                "IPv4Address": "192.168.25.2/26",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+u27@u27-VirtualBox:~$ docker network inspect ROM2
+[
+    {
+        "Name": "ROM2",
+        "Id": "5bb7068c2c082d9a297659b4a274a508172b1b92a11731838bd34a03d5a5f37c",
+        "Created": "2025-04-10T11:50:17.845955717+05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.25.64/26",
+                    "Gateway": "192.168.25.65"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "292dcf6bb635fd7dc4b8dc2cf4d07fbec6ec23919f23b94bd0334a850a635216": {
+                "Name": "cont2",
+                "EndpointID": "86789714d9dc3089e8cdba32aff929281179592d624ee50f92b15de81720547a",
+                "MacAddress": "9e:e0:fc:e4:c8:1f",
+                "IPv4Address": "192.168.25.66/26",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+u27@u27-VirtualBox:~$ docker network inspect ROM3
+[
+    {
+        "Name": "ROM3",
+        "Id": "40dfafe6d358d89c351641bc5756d1624f1537c3ebc4e7ae6739e1447ef178e5",
+        "Created": "2025-04-10T11:59:19.702074301+05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.25.128/28",
+                    "Gateway": "192.168.25.129"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "77c6d883e9994850d3faed641fd7447648a965e7e8d6dbd3ee72b1cdf4095e4b": {
+                "Name": "cont3",
+                "EndpointID": "4c38f60d1cf00e37f21b15be088386987527aeffafb78dd1e12d9b5a9c6c5026",
+                "MacAddress": "66:22:fc:07:4a:17",
+                "IPv4Address": "192.168.25.130/28",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+u27@u27-VirtualBox:~$ docker network inspect ROM4
+[
+    {
+        "Name": "ROM4",
+        "Id": "1a538a18fa48073f6415c2e124ff4e5e87111eed9019762c0a665c12718569f8",
+        "Created": "2025-04-10T11:59:29.163923921+05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.25.144/29",
+                    "Gateway": "192.168.25.145"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "38e0fe1d60f4656334f6f7609b32c58ee901520570f01aa1d937ac573d61cc3f": {
+                "Name": "cont4",
+                "EndpointID": "2ddcf54569b198daccfa3976e6cff5c8cc364a7be972477daeca984f71ba7f37",
+                "MacAddress": "92:c0:f7:53:d1:a4",
+                "IPv4Address": "192.168.25.146/29",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+
+
