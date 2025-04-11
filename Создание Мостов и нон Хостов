@@ -38,3 +38,35 @@ u27@u27-VirtualBox:~$ docker network create -d bridge --subnet 192.168.25.128/28
 u27@u27-VirtualBox:~$ docker network create -d bridge --subnet 192.168.25.144/29 --gateway 192.168.25.145 ROM4
 1a538a18fa48073f6415c2e124ff4e5e87111eed9019762c0a665c12718569f8
 
+// Проверка сети 11 22 33 44 далее будет между собой
+
+u27@u27-VirtualBox:~$ docker exec cont2 ping -c 4 cont2
+PING cont2 (192.168.25.66): 56 data bytes
+64 bytes from 192.168.25.66: seq=0 ttl=64 time=0.028 ms
+64 bytes from 192.168.25.66: seq=1 ttl=64 time=0.107 ms
+64 bytes from 192.168.25.66: seq=2 ttl=64 time=0.096 ms
+64 bytes from 192.168.25.66: seq=3 ttl=64 time=0.115 ms
+
+--- cont2 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.028/0.086/0.115 ms
+u27@u27-VirtualBox:~$ docker exec cont3 ping -c 4 cont3
+PING cont3 (192.168.25.130): 56 data bytes
+64 bytes from 192.168.25.130: seq=0 ttl=64 time=0.022 ms
+64 bytes from 192.168.25.130: seq=1 ttl=64 time=0.118 ms
+64 bytes from 192.168.25.130: seq=2 ttl=64 time=0.090 ms
+64 bytes from 192.168.25.130: seq=3 ttl=64 time=0.097 ms
+
+--- cont3 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.022/0.081/0.118 ms
+u27@u27-VirtualBox:~$ docker exec cont4 ping -c 4 cont4
+PING cont4 (192.168.25.146): 56 data bytes
+64 bytes from 192.168.25.146: seq=0 ttl=64 time=0.023 ms
+64 bytes from 192.168.25.146: seq=1 ttl=64 time=0.104 ms
+64 bytes from 192.168.25.146: seq=2 ttl=64 time=0.108 ms
+64 bytes from 192.168.25.146: seq=3 ttl=64 time=0.123 ms
+
+--- cont4 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.023/0.089/0.123 ms
