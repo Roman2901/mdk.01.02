@@ -233,4 +233,51 @@ u27@u27-VirtualBox:~$ docker network inspect ROM4
     }
 ]
 
+// Работа уже с 2 контами (проверил связь между ними)
+
+u27@u27-VirtualBox:~$ docker exec cont1 ping -c 4 cont5
+PING cont5 (192.168.25.3): 56 data bytes
+64 bytes from 192.168.25.3: seq=0 ttl=64 time=0.041 ms
+64 bytes from 192.168.25.3: seq=1 ttl=64 time=0.120 ms
+64 bytes from 192.168.25.3: seq=2 ttl=64 time=0.123 ms
+64 bytes from 192.168.25.3: seq=3 ttl=64 time=0.126 ms
+
+--- cont5 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.041/0.102/0.126 ms
+
+
+u27@u27-VirtualBox:~$ docker exec cont2 ping -c 4 cont6
+PING cont6 (192.168.25.67): 56 data bytes
+64 bytes from 192.168.25.67: seq=0 ttl=64 time=0.543 ms
+64 bytes from 192.168.25.67: seq=1 ttl=64 time=0.126 ms
+64 bytes from 192.168.25.67: seq=2 ttl=64 time=0.127 ms
+64 bytes from 192.168.25.67: seq=3 ttl=64 time=0.128 ms
+
+--- cont6 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.126/0.231/0.543 ms
+
+u27@u27-VirtualBox:~$ docker exec cont3 ping -c 4 cont7
+PING cont7 (192.168.25.131): 56 data bytes
+64 bytes from 192.168.25.131: seq=0 ttl=64 time=0.186 ms
+64 bytes from 192.168.25.131: seq=1 ttl=64 time=0.122 ms
+64 bytes from 192.168.25.131: seq=2 ttl=64 time=0.179 ms
+64 bytes from 192.168.25.131: seq=3 ttl=64 time=0.200 ms
+
+--- cont7 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.122/0.171/0.200 ms
+
+u27@u27-VirtualBox:~$ docker exec cont4 ping -c 4 cont8
+PING cont8 (192.168.25.147): 56 data bytes
+64 bytes from 192.168.25.147: seq=0 ttl=64 time=0.150 ms
+64 bytes from 192.168.25.147: seq=1 ttl=64 time=0.120 ms
+64 bytes from 192.168.25.147: seq=2 ttl=64 time=0.133 ms
+64 bytes from 192.168.25.147: seq=3 ttl=64 time=0.144 ms
+
+--- cont8 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.120/0.136/0.150 ms
+
 
