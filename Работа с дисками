@@ -1,0 +1,537 @@
+                           SDB Disk
+                           
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 34) or {+-}size{KMGTP}: 
+Last sector (34-10485726, default = 10485726) or {+-}size{KMGTP}: +2G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n       
+Partition number (2-128, default 2): 
+First sector (4194338-10485726, default = 4194338) or {+-}size{KMGTP}: 
+Last sector (4194338-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): p     
+Disk /dev/sdb: 10485760 sectors, 5.0 GiB
+Model: VBOX HARDDISK   
+Sector size (logical/physical): 512/512 bytes
+Disk identifier (GUID): 77D18B3B-77E1-478F-897C-30915FC7785D
+Partition table holds up to 128 entries
+Main partition table begins at sector 2 and ends at sector 33
+First usable sector is 34, last usable sector is 10485726
+Partitions will be aligned on 2-sector boundaries
+Total free space is 0 sectors (0 bytes)
+
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1              34         4194337   2.0 GiB     8300  Linux filesystem
+   2         4194338        10485726   3.0 GiB     8300  Linux filesystem
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+u27@u27-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1       34  4194337 4194304     2G Файловая система Linux
+/dev/sdb2  4194338 10485726 6291389     3G Файловая система Linux
+u27@u27-VirtualBox:~$ sudo gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): n
+No free sectors available
+
+Command (? for help): q           
+u27@u27-VirtualBox:~$ sudo mkfs.ext4 /dev/sdb1
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 524288 4k blocks and 131072 inodes
+Filesystem UUID: c9a98af4-0d6e-4489-8df1-3425c4836285
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables: done                            
+Сохранение таблицы inod'ов: done                            
+Создание журнала (16384 блоков): готово
+Writing superblocks and filesystem accounting information: готово
+
+u27@u27-VirtualBox:~$ sudo apt install xfsprogs 
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Для их удаления используйте «sudo apt autoremove».
+Предлагаемые пакеты:
+  xfsdump attr quota
+Следующие НОВЫЕ пакеты будут установлены:
+  xfsprogs
+Обновлено 0 пакетов, установлено 1 новых пакетов, для удаления отмечено 0 пакетов, и 53 пакетов не обновлено.
+Необходимо скачать 870 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 2 851 kB.
+Пол:1 http://tf.archive.ubuntu.com/ubuntu jammy-updates/main amd64 xfsprogs amd64 5.13.0-1ubuntu2.1 [870 kB]
+Получено 870 kB за 2с (485 kB/s)  
+Выбор ранее не выбранного пакета xfsprogs.
+(Чтение базы данных … на данный момент установлено 184097 файлов и каталогов.)
+Подготовка к распаковке …/xfsprogs_5.13.0-1ubuntu2.1_amd64.deb …
+Распаковывается xfsprogs (5.13.0-1ubuntu2.1) …
+Настраивается пакет xfsprogs (5.13.0-1ubuntu2.1) …
+update-initramfs: deferring update (trigger activated)
+Обрабатываются триггеры для man-db (2.10.2-1) …
+Обрабатываются триггеры для libc-bin (2.35-0ubuntu3.9) …
+Обрабатываются триггеры для initramfs-tools (0.140ubuntu13.4) …
+update-initramfs: Generating /boot/initrd.img-6.8.0-58-generic
+
+u27@u27-VirtualBox:~$ sudo mkfs.xfs -f /dev/sdb2
+meta-data=/dev/sdb2              isize=512    agcount=4, agsize=196606 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=786423, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+
+
+                                     SDC Disk и дальнейшая работа
+
+u27@u27-VirtualBox:~$ sudo gdisk /dev/sdc
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries in memory.
+
+Command (? for help): q   
+u27@u27-VirtualBox:~$ sudo fdisk -l | grep sdc
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+                        
+u27@u27-VirtualBox:~$ sudo gdisk /dev/sdc
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries in memory.
+
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 
+First sector (34-10485726, default = 4196352) or {+-}size{KMGTP}: 
+Last sector (4196352-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdc.
+The operation has completed successfully.
+u27@u27-VirtualBox:~$ sudo gdisk -l | grep sdc
+Problem opening -l for reading! Error is 2.
+The specified file does not exist!
+u27@u27-VirtualBox:~$ sudo fdisk -l | grep sdc
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdc1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdc2  4196352 10485726 6289375     3G Файловая система Linux
+
+Scachl
+
+u27@u27-VirtualBox:~$ sudo apt install btr
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+E: Невозможно найти пакет btr
+u27@u27-VirtualBox:~$ sudo apt install btrfs-progs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Уже установлен пакет btrfs-progs самой новой версии (5.16.2-1).
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Для их удаления используйте «sudo apt autoremove».
+Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 0 пакетов, и 53 пакетов не обновлено.
+
+
+u27@u27-VirtualBox:~$ sudo mkfs.btrfs /dev/sdc1
+btrfs-progs v5.16.2
+See http://btrfs.wiki.kernel.org for more information.
+
+Performing full device TRIM /dev/sdc1 (2.00GiB) ...
+NOTE: several default settings have changed in version 5.15, please make sure
+      this does not affect your deployments:
+      - DUP for metadata (-m dup)
+      - enabled no-holes (-O no-holes)
+      - enabled free-space-tree (-R free-space-tree)
+
+Label:              (null)
+UUID:               25da4e01-aaff-4801-9396-af0c49d15a41
+Node size:          16384
+Sector size:        4096
+Filesystem size:    2.00GiB
+Block group profiles:
+  Data:             single            8.00MiB
+  Metadata:         DUP             102.38MiB
+  System:           DUP               8.00MiB
+SSD detected:       no
+Zoned device:       no
+Incompat features:  extref, skinny-metadata, no-holes
+Runtime features:   free-space-tree
+Checksum:           crc32c
+Number of devices:  1
+Devices:
+   ID        SIZE  PATH
+    1     2.00GiB  /dev/sdc1
+u27@u27-VirtualBox:~$ sudo mkfs.ext2 /dev/sdc2
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 786171 4k blocks and 196608 inodes
+Filesystem UUID: b5ecb023-2ce5-417c-802f-68b9eccc7f86
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables: done                            
+Сохранение таблицы inod'ов: done                            
+Writing superblocks and filesystem accounting information: готово
+
+u27@u27-VirtualBox:~$ sudo gparted
+sudo: gparted: команда не найдена
+
+u27@u27-VirtualBox:~$ sudo apt install gparted
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Для их удаления используйте «sudo apt autoremove».
+Будут установлены следующие дополнительные пакеты:
+  gparted-common
+Предлагаемые пакеты:
+  dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools
+  xfsprogs exfatprogs
+Следующие НОВЫЕ пакеты будут установлены:
+  gparted gparted-common
+Обновлено 0 пакетов, установлено 2 новых пакетов, для удаления отмечено 0 пакетов, и 53 пакетов не обновлено.
+Необходимо скачать 490 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 2 128 kB.
+Хотите продолжить? [Д/н] д
+Пол:1 http://tf.archive.ubuntu.com/ubuntu jammy/main amd64 gparted-common all 1.3.1-1ubuntu1 [71,9 kB]
+Пол:2 http://tf.archive.ubuntu.com/ubuntu jammy/main amd64 gparted amd64 1.3.1-1ubuntu1 [418 kB]
+Получено 490 kB за 1с (528 kB/s)           
+Выбор ранее не выбранного пакета gparted-common.
+(Чтение базы данных … на данный момент установлено 184005 файлов и каталогов.)
+Подготовка к распаковке …/gparted-common_1.3.1-1ubuntu1_all.deb …
+Распаковывается gparted-common (1.3.1-1ubuntu1) …
+Выбор ранее не выбранного пакета gparted.
+Подготовка к распаковке …/gparted_1.3.1-1ubuntu1_amd64.deb …
+Распаковывается gparted (1.3.1-1ubuntu1) …
+Настраивается пакет gparted-common (1.3.1-1ubuntu1) …
+Настраивается пакет gparted (1.3.1-1ubuntu1) …
+Обрабатываются триггеры для mailcap (3.70+nmu1ubuntu1) …
+Обрабатываются триггеры для desktop-file-utils (0.26-1ubuntu3) …
+Обрабатываются триггеры для hicolor-icon-theme (0.17-2) …
+Обрабатываются триггеры для gnome-menus (3.36.0-1ubuntu3) …
+Обрабатываются триггеры для man-db (2.10.2-1) …
+
+u27@u27-VirtualBox:~$ sudo gparted
+GParted 1.3.1
+configuration --enable-libparted-dmraid --enable-online-resize
+libparted 3.4
+
+u27@u27-VirtualBox:~$ sudo fdisk -l | grep sdd
+u27@u27-VirtualBox:~$ sudo fdisk -l | grep sdc
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdc1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdc2  4196352 10485726 6289375     3G Файловая система Linux
+u27@u27-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1       34  4194337 4194304     2G Файловая система Linux
+/dev/sdb2  4194338 10485726 6291389     3G Файловая система Linux
+u27@u27-VirtualBox:~$ sudo lsblk /dev/sdc1
+NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+sdc1   8:33   0   2G  0 part 
+u27@u27-VirtualBox:~$ sudo lsblk -f /dev/sdc1
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc1 btrfs              25da4e01-aaff-4801-9396-af0c49d15a41                
+u27@u27-VirtualBox:~$ sudo lsblk -f /dev/sdc2
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc2 ext2   1.0         b5ecb023-2ce5-417c-802f-68b9eccc7f86                
+u27@u27-VirtualBox:~$ sudo -s
+root@u27-VirtualBox:/home/u27# cd /mnt
+root@u27-VirtualBox:/mnt# ls -l
+итого 4
+drwxr-xr-x 2 root root 4096 мая 16 11:26 ext4
+root@u27-VirtualBox:/mnt# sudo mkdir xfs
+root@u27-VirtualBox:/mnt# sudo mkdir btrfs
+root@u27-VirtualBox:/mnt# sudo mkdir xfs2
+root@u27-VirtualBox:/mnt# sudo mkdir ext2
+root@u27-VirtualBox:/mnt# sudo mkdir btrfs2
+root@u27-VirtualBox:/mnt# chown u27:u27 ext4 ext2 xfs btrfs xfs xfs2 btrfs2
+root@u27-VirtualBox:/mnt# ls -l
+итого 24
+drwxr-xr-x 2 u27 u27 4096 мая 16 11:31 btrfs
+drwxr-xr-x 2 u27 u27 4096 мая 16 11:32 btrfs2
+drwxr-xr-x 2 u27 u27 4096 мая 16 11:32 ext2
+drwxr-xr-x 2 u27 u27 4096 мая 16 11:26 ext4
+drwxr-xr-x 2 u27 u27 4096 мая 16 11:31 xfs
+drwxr-xr-x 2 u27 u27 4096 мая 16 11:31 xfs2
+root@u27-VirtualBox:/mnt# mount /dev/sdb1 ext4
+root@u27-VirtualBox:/mnt# ls -l ext4/
+итого 16
+drwx------ 2 root root 16384 мая 16 10:15 lost+found
+root@u27-VirtualBox:/mnt# mount /dev/sdb2 xfs
+root@u27-VirtualBox:/mnt# mount /dev/sdc1 btrfs
+root@u27-VirtualBox:/mnt# mount /dev/sdc2 ext2
+root@u27-VirtualBox:/mnt# ls -l ext2/
+итого 16
+drwx------ 2 root root 16384 мая 16 10:43 lost+found
+root@u27-VirtualBox:/mnt# exit
+exit
+
+u27@u27-VirtualBox:~$ cd /mnt/ext4
+u27@u27-VirtualBox:/mnt/ext4$ ls -l
+итого 16
+drwx------ 2 root root 16384 мая 16 10:15 lost+found
+u27@u27-VirtualBox:/mnt/ext4$ sudo ls -l ../
+итого 32
+drwxr-xr-x 1 root root    0 мая 16 10:42 btrfs
+drwxr-xr-x 2 u27  u27  4096 мая 16 11:32 btrfs2
+drwxr-xr-x 3 root root 4096 мая 16 10:43 ext2
+drwxr-xr-x 3 root root 4096 мая 16 10:15 ext4
+drwxr-xr-x 2 root root    6 мая 16 11:06 xfs
+drwxr-xr-x 2 u27  u27  4096 мая 16 11:31 xfs2
+
+u27@u27-VirtualBox:/mnt/ext4$ sudo -s
+root@u27-VirtualBox:/mnt/ext4# cd /mnt
+root@u27-VirtualBox:/mnt# chown u27:u27 ext4 ext2 xfs btrfs xfs2 btrfs2
+root@u27-VirtualBox:/mnt# exit
+exit
+
+u27@u27-VirtualBox:/mnt/ext4$ touch test.txt
+u27@u27-VirtualBox:/mnt/ext4$ ls -l
+итого 16
+drwx------ 2 root root 16384 мая 16 10:15 lost+found
+-rw-rw-r-- 1 u27  u27      0 мая 16 11:43 test.txt
+u27@u27-VirtualBox:/mnt/ext4$ cat > test.txt
+RomaTopchik   
+toptop
+toptopop
+123123123
+12312
+3
+
+q
+quit    
+aaaa
+a
+aa
+
+u27@u27-VirtualBox:/mnt/ext4$ cat >> test.txt
+sjhgjkhgkdsjfhgkjsdhgkdjshfgu27@u27-VirtualBox:/mnt/ext4$ cat test.txt
+RomaTopchik
+toptop
+toptopop
+123123123
+12312
+3
+
+q
+quit
+aaaa
+a
+aa
+sjhgjkhgkdsjfhgkjsdhgkdjshfgu27@u27-VirtualBox:/mnt/ext4$ 
+u27@u27-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdb1 >> test.txt
+u27@u27-VirtualBox:/mnt/ext4$ cat test.txt
+RomaTopchik
+toptop
+toptopop
+123123123
+12312
+3
+
+q
+quit
+aaaa
+a
+aa
+sjhgjkhgkdsjfhgkjsdhgkdjshfgNAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdb1 ext4   1.0         c9a98af4-0d6e-4489-8df1-3425c4836285    1,8G     0% /mnt/ext4
+u27@u27-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdb1
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdb1 ext4   1.0         c9a98af4-0d6e-4489-8df1-3425c4836285    1,8G     0% /mnt/ext4
+u27@u27-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdc2
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc2 ext2   1.0         b5ecb023-2ce5-417c-802f-68b9eccc7f86    2,8G     0% /mnt/ext2
+u27@u27-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdc1
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc1 btrfs              25da4e01-aaff-4801-9396-af0c49d15a41    1,8G     0% /mnt/btrfs
+
+
+                                     df -i -h и просто df
+
+u27@u27-VirtualBox:/mnt/ext4$ df
+Файл.система   1K-блоков Использовано Доступно Использовано% Cмонтировано в
+tmpfs             201584         1784   199800            1% /run
+/dev/sda3       25106692     17970052  5835956           76% /
+tmpfs            1007916            0  1007916            0% /dev/shm
+tmpfs               5120            4     5116            1% /run/lock
+/dev/sda2         524252         6228   518024            2% /boot/efi
+tmpfs             201580          116   201464            1% /run/user/1000
+/dev/sdb1        1992552           28  1871284            1% /mnt/ext4
+/dev/sdb2        3135452        54904  3080548            2% /mnt/xfs
+/dev/sdc1        2097152         5920  1870080            1% /mnt/btrfs
+/dev/sdc2        3090708           24  2933452            1% /mnt/ext2
+u27@u27-VirtualBox:/mnt/ext4$ df -h
+Файл.система   Размер Использовано  Дост Использовано% Cмонтировано в
+tmpfs            197M         1,8M  196M            1% /run
+/dev/sda3         24G          18G  5,6G           76% /
+tmpfs            985M            0  985M            0% /dev/shm
+tmpfs            5,0M         4,0K  5,0M            1% /run/lock
+/dev/sda2        512M         6,1M  506M            2% /boot/efi
+tmpfs            197M         116K  197M            1% /run/user/1000
+/dev/sdb1        2,0G          28K  1,8G            1% /mnt/ext4
+/dev/sdb2        3,0G          54M  3,0G            2% /mnt/xfs
+/dev/sdc1        2,0G         5,8M  1,8G            1% /mnt/btrfs
+/dev/sdc2        3,0G          24K  2,8G            1% /mnt/ext2
+u27@u27-VirtualBox:/mnt/ext4$ df -i
+Файл.система    Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+tmpfs           251979          1163    250816             1% /run
+/dev/sda3      1605632        273068   1332564            18% /
+tmpfs           251979             1    251978             1% /dev/shm
+tmpfs           251979             4    251975             1% /run/lock
+/dev/sda2            0             0         0              - /boot/efi
+tmpfs            50395           157     50238             1% /run/user/1000
+/dev/sdb1       131072            12    131060             1% /mnt/ext4
+/dev/sdb2      1572800             3   1572797             1% /mnt/xfs
+/dev/sdc1            0             0         0              - /mnt/btrfs
+/dev/sdc2       196608            11    196597             1% /mnt/ext2
+
+u27@u27-VirtualBox:/mnt/ext4$ ls -li test.txt
+12 -rw-rw-r-- 1 u27 u27 266 мая 16 11:50 test.txt
+u27@u27-VirtualBox:/mnt/ext4$ touch test2.txt
+u27@u27-VirtualBox:/mnt/ext4$ ls -li test2.txt
+13 -rw-rw-r-- 1 u27 u27 0 мая 16 11:56 test2.txt
+u27@u27-VirtualBox:/mnt/ext4$ cd ..
+27@u27-VirtualBox:/mnt$ cd btrfs
+u27@u27-VirtualBox:/mnt/btrfs$ touch test.txt
+u27@u27-VirtualBox:/mnt/btrfs$ ls -li test.txt
+257 -rw-rw-r-- 1 u27 u27 0 мая 16 11:58 test.txt
+u27@u27-VirtualBox:/mnt/btrfs$ cd..
+cd..: команда не найдена
+u27@u27-VirtualBox:/mnt/btrfs$ cd ..
+u27@u27-VirtualBox:/mnt$ cd xfs
+u27@u27-VirtualBox:/mnt/xfs$ touch test.txt
+u27@u27-VirtualBox:/mnt/xfs$ ls -li test.txt
+131 -rw-rw-r-- 1 u27 u27 0 мая 16 11:59 test.txt
+u27@u27-VirtualBox:/mnt/xfs$ cd ..
+u27@u27-VirtualBox:/mnt$ ls -li
+итого 32
+   256 drwxr-xr-x 1 u27 u27   16 мая 16 11:58 btrfs
+798461 drwxr-xr-x 2 u27 u27 4096 мая 16 11:32 btrfs2
+     2 drwxr-xr-x 3 u27 u27 4096 мая 16 10:43 ext2
+     2 drwxr-xr-x 3 u27 u27 4096 мая 16 11:56 ext4
+   128 drwxr-xr-x 2 u27 u27   22 мая 16 11:59 xfs
+798447 drwxr-xr-x 2 u27 u27 4096 мая 16 11:31 xfs2
+u27@u27-VirtualBox:/mnt$ df -i .
+Файл.система    Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+/dev/sda3      1605632        273071   1332561            18% /
+u27@u27-VirtualBox:/mnt$ cd ext4
+u27@u27-VirtualBox:/mnt/ext4$ df -i .
+Файл.система   Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+/dev/sdb1      131072            13    131059             1% /mnt/ext4
+u27@u27-VirtualBox:/mnt/ext4$ cd ../ext2
+u27@u27-VirtualBox:/mnt/ext2$ df -i .
+Файл.система   Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+/dev/sdc2      196608            11    196597             1% /mnt/ext2
+u27@u27-VirtualBox:/mnt/ext2$ sudo du
+16	./lost+found
+20	.
+u27@u27-VirtualBox:/mnt/ext2$ cd ..
+u27@u27-VirtualBox:/mnt$ cd ext4
+u27@u27-VirtualBox:/mnt/ext4$ cd mnt
+bash: cd: mnt: Нет такого файла или каталога
+u27@u27-VirtualBox:/mnt/ext4$ cd ..
+u27@u27-VirtualBox:/mnt$ sudo du -h
+16K	./btrfs
+16K	./ext4/lost+found
+24K	./ext4
+0	./xfs
+4,0K	./xfs2
+16K	./ext2/lost+found
+20K	./ext2
+4,0K	./btrfs2
+72K	.
+u27@u27-VirtualBox:/mnt$ cd /etc/
+u27@u27-VirtualBox:/etc$ sudo du -h
+u27@u27-VirtualBox:/etc$ sudo du -hs
+12M	.
+u27@u27-VirtualBox:/etc$ sudo du -hs ./systemd
+264K	./systemd
+u27@u27-VirtualBox:/etc$ cd ..
+u27@u27-VirtualBox:/$ ls -l\
+> 
+итого 2744400
+lrwxrwxrwx   1 root root          7 фев  6 13:15 bin -> usr/bin
+drwxr-xr-x   4 root root       4096 мая 16 11:05 boot
+drwxrwxr-x   2 root root       4096 фев  6 13:19 cdrom
+drwxr-xr-x  19 root root       4420 мая 16 11:21 dev
+drwxr-xr-x 132 root root      12288 мая 16 11:04 etc
+drwxr-xr-x   3 root root       4096 фев  6 13:21 home
+lrwxrwxrwx   1 root root          7 фев  6 13:15 lib -> usr/lib
+lrwxrwxrwx   1 root root          9 фев  6 13:15 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root          9 фев  6 13:15 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root         10 фев  6 13:15 libx32 -> usr/libx32
+drwx------   2 root root      16384 фев  6 13:15 lost+found
+drwxr-xr-x   2 root root       4096 авг  8  2023 media
+drwxr-xr-x   8 root root       4096 мая 16 11:32 mnt
+drwxr-xr-x   3 root root       4096 мар 21 11:33 opt
+dr-xr-xr-x 286 root root          0 мая 16 09:57 proc
+drwx------   6 root root       4096 мая 16 11:36 root
+drwxr-xr-x  37 root root       1000 мая 16 10:10 run
+lrwxrwxrwx   1 root root          8 фев  6 13:15 sbin -> usr/sbin
+drwxr-xr-x  13 root root       4096 авг  8  2023 snap
+drwxr-xr-x   2 root root       4096 авг  8  2023 srv
+-rw-------   1 root root 2810183680 фев  6 13:15 swapfile
+dr-xr-xr-x  13 root root          0 мая 16 09:57 sys
+drwxrwxrwt  19 root root       4096 мая 16 12:07 tmp
+drwxr-xr-x  14 root root       4096 авг  8  2023 usr
+drwxr-xr-x  14 root root       4096 авг  8  2023 var
