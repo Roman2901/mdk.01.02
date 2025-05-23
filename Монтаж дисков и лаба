@@ -1,0 +1,127 @@
+Монтаж дисков
+u27@u27-VirtualBox:/mnt/ext4$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt/ext4$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt/ext4$ cd ..
+u27@u27-VirtualBox:/mnt$ sudo lsblk -f
+NAME   FSTYPE   FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0  squashfs 4.0                                                    0   100% /snap/core20/2571
+loop1  squashfs 4.0                                                    0   100% /snap/core20/2501
+loop2  squashfs 4.0                                                    0   100% /snap/core22/1908
+loop3  squashfs 4.0                                                    0   100% /snap/bare/5
+loop4  squashfs 4.0                                                    0   100% /snap/core22/1963
+loop5  squashfs 4.0                                                    0   100% /snap/firefox/2987
+loop6  squashfs 4.0                                                    0   100% /snap/firefox/6019
+loop7  squashfs 4.0                                                    0   100% /snap/gnome-3-38-2004/143
+loop8  squashfs 4.0                                                    0   100% /snap/gnome-42-2204/120
+loop9  squashfs 4.0                                                    0   100% /snap/gtk-common-themes/1535
+loop10 squashfs 4.0                                                    0   100% /snap/gnome-42-2204/202
+loop11 squashfs 4.0                                                    0   100% /snap/snap-store/1216
+loop12 squashfs 4.0                                                    0   100% /snap/snap-store/959
+loop13 squashfs 4.0                                                    0   100% /snap/snapd/23771
+loop14 squashfs 4.0                                                    0   100% /snap/snapd/24505
+loop15 squashfs 4.0                                                    0   100% /snap/snapd-desktop-integration/253
+loop16 squashfs 4.0                                                    0   100% /snap/snapd-desktop-integration/83
+sda                                                                             
+├─sda1                                                                          
+├─sda2 vfat     FAT32       F895-5FFB                             505,9M     1% /boot/efi
+└─sda3 ext4     1.0         0db7de06-beba-4652-ad64-28061acac501    4,7G    75% /var/snap/firefox/common/host-hunspell
+                                                                                /
+sdb                                                                             
+├─sdb1 ext4     1.0         c9a98af4-0d6e-4489-8df1-3425c4836285    1,8G     0% /mnt/ext4
+└─sdb2 xfs                  6fefa21b-93e0-483d-8d67-c2ecf3f689d5                
+sdc                                                                             
+├─sdc1 btrfs                25da4e01-aaff-4801-9396-af0c49d15a41                
+└─sdc2 ext2     1.0         b5ecb023-2ce5-417c-802f-68b9eccc7f86                
+sr0                                                                             
+u27@u27-VirtualBox:/mnt$ sudo mount /dev/sdb1 /mnt/ext4
+mount: /mnt/ext4: /dev/sdb1 уже смонтирован в /mnt/ext4.
+u27@u27-VirtualBox:/mnt$ sudo mount /dev/sdb2 /mnt/xfs
+u27@u27-VirtualBox:/mnt$ cd ..
+u27@u27-VirtualBox:/$ cd mnt
+u27@u27-VirtualBox:/mnt$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt$ sudo vim /etc/fstab
+u27@u27-VirtualBox:/mnt$ sudo gdisk /dev/sdb2
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries in memory.
+
+Command (? for help): d
+No partitions
+
+Command (? for help): q
+u27@u27-VirtualBox:/mnt$ sudo mount /dev/sdb2 /mnt/xfs
+mount: /mnt/xfs: /dev/sdb2 уже смонтирован в /mnt/xfs.
+u27@u27-VirtualBox:/mnt$ sudo lsblk -f
+NAME   FSTYPE   FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0  squashfs 4.0                                                    0   100% /snap/core20/2571
+loop1  squashfs 4.0                                                    0   100% /snap/core20/2501
+loop2  squashfs 4.0                                                    0   100% /snap/core22/1908
+loop3  squashfs 4.0                                                    0   100% /snap/bare/5
+loop4  squashfs 4.0                                                    0   100% /snap/core22/1963
+loop5  squashfs 4.0                                                    0   100% /snap/firefox/2987
+loop6  squashfs 4.0                                                    0   100% /snap/firefox/6019
+loop7  squashfs 4.0                                                    0   100% /snap/gnome-3-38-2004/143
+loop8  squashfs 4.0                                                    0   100% /snap/gnome-42-2204/120
+loop9  squashfs 4.0                                                    0   100% /snap/gtk-common-themes/1535
+loop10 squashfs 4.0                                                    0   100% /snap/gnome-42-2204/202
+loop11 squashfs 4.0                                                    0   100% /snap/snap-store/1216
+loop12 squashfs 4.0                                                    0   100% /snap/snap-store/959
+loop13 squashfs 4.0                                                    0   100% /snap/snapd/23771
+loop14 squashfs 4.0                                                    0   100% /snap/snapd/24505
+loop15 squashfs 4.0                                                    0   100% /snap/snapd-desktop-integration/253
+loop16 squashfs 4.0                                                    0   100% /snap/snapd-desktop-integration/83
+sda                                                                             
+├─sda1                                                                          
+├─sda2 vfat     FAT32       F895-5FFB                             505,9M     1% /boot/efi
+└─sda3 ext4     1.0         0db7de06-beba-4652-ad64-28061acac501    5,6G    71% /var/snap/firefox/common/host-hunspell
+                                                                                /
+sdb                                                                             
+├─sdb1 ext4     1.0         c9a98af4-0d6e-4489-8df1-3425c4836285    1,8G     0% /mnt/ext4
+└─sdb2 xfs                  6fefa21b-93e0-483d-8d67-c2ecf3f689d5    2,9G     2% /mnt/xfs
+sdc                                                                             
+├─sdc1 btrfs                25da4e01-aaff-4801-9396-af0c49d15a41                
+└─sdc2 ext2     1.0         b5ecb023-2ce5-417c-802f-68b9eccc7f86                
+sr0                                                                             
+u27@u27-VirtualBox:/mnt$ sudo mount /dev/sdc1 /mnt/btrfs
+u27@u27-VirtualBox:/mnt$ sudo mount /dev/sdc2 /mnt/ext2
+u27@u27-VirtualBox:/mnt$ sudo lsblk -f
+NAME   FSTYPE   FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0  squashfs 4.0                                                    0   100% /snap/core20/2571
+loop1  squashfs 4.0                                                    0   100% /snap/core20/2501
+loop2  squashfs 4.0                                                    0   100% /snap/core22/1908
+loop3  squashfs 4.0                                                    0   100% /snap/bare/5
+loop4  squashfs 4.0                                                    0   100% /snap/core22/1963
+loop5  squashfs 4.0                                                    0   100% /snap/firefox/2987
+loop6  squashfs 4.0                                                    0   100% /snap/firefox/6019
+loop7  squashfs 4.0                                                    0   100% /snap/gnome-3-38-2004/143
+loop8  squashfs 4.0                                                    0   100% /snap/gnome-42-2204/120
+loop9  squashfs 4.0                                                    0   100% /snap/gtk-common-themes/1535
+loop10 squashfs 4.0                                                    0   100% /snap/gnome-42-2204/202
+loop11 squashfs 4.0                                                    0   100% /snap/snap-store/1216
+loop12 squashfs 4.0                                                    0   100% /snap/snap-store/959
+loop13 squashfs 4.0                                                    0   100% /snap/snapd/23771
+loop14 squashfs 4.0                                                    0   100% /snap/snapd/24505
+loop15 squashfs 4.0                                                    0   100% /snap/snapd-desktop-integration/253
+loop16 squashfs 4.0                                                    0   100% /snap/snapd-desktop-integration/83
+sda                                                                             
+├─sda1                                                                          
+├─sda2 vfat     FAT32       F895-5FFB                             505,9M     1% /boot/efi
+└─sda3 ext4     1.0         0db7de06-beba-4652-ad64-28061acac501    5,6G    71% /var/snap/firefox/common/host-hunspell
+                                                                                /
+sdb                                                                             
+├─sdb1 ext4     1.0         c9a98af4-0d6e-4489-8df1-3425c4836285    1,8G     0% /mnt/ext4
+└─sdb2 xfs                  6fefa21b-93e0-483d-8d67-c2ecf3f689d5    2,9G     2% /mnt/xfs
+sdc                                                                             
+├─sdc1 btrfs                25da4e01-aaff-4801-9396-af0c49d15a41    1,8G     0% /mnt/btrfs
+└─sdc2 ext2     1.0         b5ecb023-2ce5-417c-802f-68b9eccc7f86    2,8G     0% /mnt/ext2
+sr0  
